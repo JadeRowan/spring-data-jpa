@@ -1,0 +1,116 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Categories-products"
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: "Category"
+paths:
+  /categories:
+    post:
+      tags:
+        - "Category"
+      summary: "Add a new category"
+      operationId: "addCategory"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/CategoryRequestDto"
+      responses:
+        "405":
+          description: "Invalid input"
+
+  /categories/{id}:
+    get:
+      tags:
+        - "Category"
+      summary: "Find category by ID"
+      operationId: "getCategoryById"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of category to return"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CategoryResponseDto"
+    put:
+      tags:
+        - "Category"
+      summary: "Updates a category name"
+      description: ""
+      operationId: "updateCategory"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/CategoryRequestDto"
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CategoryResponseDto"
+    delete:
+      tags:
+        - "Category"
+      summary: "Deletes a category"
+      description: ""
+      operationId: "deleteCategory"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Pet not found"
+
+
+definitions:
+
+  CategoryRequestDto:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+    xml:
+      name: "CategoryRequestDto"
+  CategoryResponseDto:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    xml:
+      name: "CategoryResponseDto"
+
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
