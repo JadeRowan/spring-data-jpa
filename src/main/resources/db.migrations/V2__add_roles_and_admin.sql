@@ -1,4 +1,4 @@
-insert into categories (name) values ('toys');
-insert into categories (name) values ('food');
-insert into categories (name) values ('kitchen');
-insert into categories (name) values ('electronic-devices');
+insert into test.categories (name) values ('toys');
+insert into test.categories (name) values ('food');
+insert into test.categories (name) values ('kitchen');
+insert into test.categories (name) values ('electronic-devices');

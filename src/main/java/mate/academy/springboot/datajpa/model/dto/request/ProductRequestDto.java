@@ -1,5 +1,7 @@
 package mate.academy.springboot.datajpa.model.dto.request;
 
+import java.util.Objects;
+
 public class ProductRequestDto {
     private String title;
     private Double price;
@@ -39,23 +41,31 @@ public class ProductRequestDto {
     }
 
     public boolean equals(final Object o) {
-        if (o == this) return true;
-        if (!(o instanceof ProductRequestDto))
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof ProductRequestDto)) {
             return false;
+        }
         final ProductRequestDto other = (ProductRequestDto) o;
-        if (!other.canEqual((Object) this)) return false;
+        if (!other.canEqual(this)) {
+            return false;
+        }
         final Object this$title = this.getTitle();
         final Object other$title = other.getTitle();
-        if (this$title == null ? other$title != null : !this$title.equals(other$title))
+        if (!Objects.equals(this$title, other$title)) {
             return false;
+        }
         final Object this$price = this.getPrice();
         final Object other$price = other.getPrice();
-        if (this$price == null ? other$price != null : !this$price.equals(other$price))
+        if (!Objects.equals(this$price, other$price)) {
             return false;
+        }
         final Object this$categoryId = this.getCategoryId();
         final Object other$categoryId = other.getCategoryId();
-        if (this$categoryId == null ? other$categoryId != null : !this$categoryId.equals(other$categoryId))
+        if (!Objects.equals(this$categoryId, other$categoryId)) {
             return false;
+        }
         return true;
     }
 
@@ -64,18 +74,21 @@ public class ProductRequestDto {
     }
 
     public int hashCode() {
-        final int PRIME = 59;
+        final int prime = 59;
         int result = 1;
         final Object $title = this.getTitle();
-        result = result * PRIME + ($title == null ? 43 : $title.hashCode());
+        result = result * prime + ($title == null ? 43 : $title.hashCode());
         final Object $price = this.getPrice();
-        result = result * PRIME + ($price == null ? 43 : $price.hashCode());
+        result = result * prime + ($price == null ? 43 : $price.hashCode());
         final Object $categoryId = this.getCategoryId();
-        result = result * PRIME + ($categoryId == null ? 43 : $categoryId.hashCode());
+        result = result * prime + ($categoryId == null ? 43 : $categoryId.hashCode());
         return result;
     }
 
     public String toString() {
-        return "ProductRequestDto(title=" + this.getTitle() + ", price=" + this.getPrice() + ", categoryId=" + this.getCategoryId() + ")";
+        return "ProductRequestDto(title="
+                + this.getTitle()
+                + ", price=" + this.getPrice()
+                + ", categoryId=" + this.getCategoryId() + ")";
     }
 }
