@@ -1,14 +1,18 @@
 package mate.academy.springboot.datajpa.controller;
 
+import static org.springframework.http.ResponseEntity.noContent;
+import static org.springframework.http.ResponseEntity.ok;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.EntityNotFoundException;
 import mate.academy.springboot.datajpa.mapper.ProductDtoMapper;
 import mate.academy.springboot.datajpa.model.Product;
 import mate.academy.springboot.datajpa.model.dto.request.ProductRequestDto;
 import mate.academy.springboot.datajpa.model.dto.response.ProductResponseDto;
 import mate.academy.springboot.datajpa.service.ProductService;
-import org.springframework.stereotype.Component;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,14 +36,21 @@ public class ProductController {
 
     @PostMapping
     public ProductResponseDto createProduct(@RequestBody ProductRequestDto productRequestDto) {
-        Product product = productService.save(productDtoMapper.toModel(productRequestDto));
+        System.out.println(productRequestDto);
+        Product product1 = productDtoMapper.toModel(productRequestDto);
+        System.out.println(product1);
+        Product product = productService.save(product1);
+        System.out.println(product);
         return productDtoMapper.toDto(product);
     }
 
     @GetMapping("/{id}")
-    public ProductResponseDto getProduct(@PathVariable Long id) {
-        Product product = productService.get(id);
-        return productDtoMapper.toDto(product);
+    public ResponseEntity<ProductResponseDto> getProduct(@PathVariable Long id) {
+        try {
+            return ok(productDtoMapper.toDto(productService.get(id)));
+        } catch (EntityNotFoundException e) {
+            return noContent().build();
+        }
     }
 
     @DeleteMapping("/{id}")
