@@ -3,12 +3,11 @@ package cucumber;
 import static java.lang.String.format;
 import static org.springframework.test.web.reactive.server.WebTestClient.bindToServer;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import mate.academy.springboot.datajpa.model.dto.request.ProductRequestDto;
-import mate.academy.springboot.datajpa.model.dto.response.ProductResponseDto;
+import springboot.datajpa.model.dto.request.ProductRequestDto;
+import springboot.datajpa.model.dto.response.ProductResponseDto;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
